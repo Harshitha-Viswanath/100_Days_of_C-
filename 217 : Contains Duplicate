@@ -1,0 +1,85 @@
+LEETCODE PROBLEM : 217 : Contains Duplicate
+
+Approach 1 : For every element, a duplicate element is searched for starting from position(element) until end of the vector 
+Result : 70/75 test cases passed. Time Limit Exceeded
+
+class Solution {
+public:
+    bool containsDuplicate(vector<int>& nums) {
+        for (int element : nums)
+        {
+            auto it = std::find(nums.begin(),nums.end(), element);
+            auto it_1 = std::find(it+1, nums.end(), element);
+            if(it_1!=nums.end())
+                return true;
+            else
+                continue;
+        }
+
+        return false;
+    }
+};
+
+Approach 2 : Sorting of the vector. Check if the next immediate element is a duplicate
+Result : All test cases passed with least time and memory usage
+
+class Solution {
+public:
+    bool containsDuplicate(vector<int>& nums) {
+        sort(nums.begin(), nums.end());
+        for(int i = 0; i < nums.size()-1; i++)
+            if(nums[i]==nums[i+1])
+                return true;
+        
+        return false;
+    }
+
+};
+
+Approach 3 : Use of sets : Convert the vector to a set. If the vector size > set size then return true
+Result : All test cases passed
+
+class Solution {
+public:
+    bool containsDuplicate(vector<int>& nums) {
+        std::set<int> nums_set(nums.begin(),nums.end());
+        return nums.size()>nums_set.size();
+    }
+
+};
+
+Approach 4 : Hash maps : Count the frequency for elements. If frequnecy >= 2 return true
+Result : All test cases passed
+
+class Solution {
+public:
+    bool containsDuplicate(vector<int>& nums) {
+        std::unordered_map<int,int> m;
+        for(int element : nums)
+                m[element]++;
+        
+
+        for(auto element : m)
+            if(element.second >= 2)
+                return true;
+
+        return false;
+    }
+
+};
+
+Brute force : For every element check if there is a duplicate starting from next element to end
+Result : All test cases passed. Time limit execeeded
+
+class Solution {
+public:
+    bool containsDuplicate(vector<int>& nums) {
+        for (int i = 0; i < nums.size(); i++)
+            for (int j = i+1; j < nums.size(); j++)
+                if(nums[i]==nums[j])
+                    return true;
+    
+        return false;
+    }
+
+};

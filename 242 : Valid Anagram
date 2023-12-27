@@ -1,0 +1,55 @@
+LEETCODE PROBLEM : 242 : Valid Anagram
+
+Approach 1 : Convert both the strings to hash maps and return true if they are equal
+Result : All test cases passed
+
+class Solution {
+public:
+    bool isAnagram(string s, string t) {
+        std::unordered_map<char, int> s_map;
+        std::unordered_map<char, int> t_map;
+
+        for(auto element : s)
+            s_map[element]++;
+
+        for(auto element : t)
+            t_map[element]++;
+
+        return s_map==t_map;
+    }
+};
+
+Approach 2 : Sort both the strings and return true if they are equal
+Result : All test cases passed. Better performance in terms of time and memory
+
+class Solution {
+public:
+    bool isAnagram(string s, string t) {
+        sort(s.begin(), s.end());
+        sort(t.begin(), t.end());
+
+        return s==t;
+    }
+};
+
+Approach 3 : Convert one of the string into a hash map. Decrease the frequency of the hash map as per the elements present in the other string. Return true if all the frequnecies are 0
+Result : All test cases passed
+
+class Solution {
+public:
+    bool isAnagram(string s, string t) {
+        std::unordered_map<char,int> s_map;
+
+        for(char element : s)
+            s_map[element]++;
+
+        for(char element : t)
+            s_map[element]--;
+
+        for(auto element : s_map)
+            if(element.second!=0)
+                return false;
+
+        return true;
+    }
+};

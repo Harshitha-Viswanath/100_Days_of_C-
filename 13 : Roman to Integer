@@ -1,0 +1,31 @@
+LEETCODE PROBLEM : 13 : Roman to Integer
+Approach 1 : 
+Save all the values in a hash map like a look up table.
+If the values is lesser than the next with respect to the values in hash map, subtract that value from result else add the value
+
+class Solution {
+public:
+    int romanToInt(string s) {
+        std::unordered_map<char, int> alpha_map;
+        int result = 0;
+
+        alpha_map['I'] = 1;
+        alpha_map['V'] = 5;
+        alpha_map['X'] = 10;
+        alpha_map['L'] = 50;
+        alpha_map['C'] = 100;
+        alpha_map['D'] = 500;
+        alpha_map['M'] = 1000;
+
+        for(int i = 0; i < s.length(); i++)
+        {
+            if(alpha_map[s[i]] < alpha_map[s[i+1]])
+                result -= alpha_map[s[i]];
+            else
+                result += alpha_map[s[i]];
+        }
+
+        return result;
+
+    }
+};

@@ -1,0 +1,17 @@
+LEETCODE PROBLEM : 9 : Palindrome Number
+
+Approach 1 : 
+Convert the given number into a string, make two copies.
+Reverse one of the string.
+Check if the orginal string is same as the reversed one and return the boolean value.
+
+class Solution {
+public:
+    bool isPalindrome(int x) {
+        std::string w = std::to_string(x);
+        std::string rw = w;
+        reverse(rw.begin(),rw.end());
+
+        return w==rw;
+    }
+};
